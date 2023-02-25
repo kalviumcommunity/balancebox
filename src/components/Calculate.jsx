@@ -33,6 +33,7 @@ function Calculate() {
       totalProtein += curr.protein * parseInt(curr.quantity);
       totalFat += curr.fat * parseInt(curr.quantity);
       totalCarbs += curr.carbs * parseInt(curr.quantity);
+      return acc
     }, 0);
   
     return {
