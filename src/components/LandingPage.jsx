@@ -5,17 +5,14 @@ import "./components.css";
 import logo from "./utils/logo.png";
 import user from "./utils/Profile.png";
 
-
-
 function LandingPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const data = [
-    { name: "alooparatha", protein: 5, carbs: 10, fat: 0 },
-    { name: "bread", protein: 8, carbs: 60, fat: 8 },
-    { name: "tea", protein: 6, carbs: 16, fat: 7 },
-    { name: "apple", protein: 4, carbs: 106, fat: 57 },
+    { name: "alooparatha", protein: 5, carbs: 10, fat: 0 ,quantity:1},
+    { name: "bread", protein: 8, carbs: 60, fat: 8 ,quantity:1},
+    { name: "tea", protein: 6, carbs: 16, fat: 7,quantity:1 },
+    { name: "apple", protein: 4, carbs: 106, fat: 57,quantity:1 },
   ];
-
 
   // hooks
   const [breakfast, setbreakfast] = useState("none");
@@ -25,8 +22,6 @@ function LandingPage() {
   const [Breakfastlist, setBreakfastList] = useState([]);
   const [Lunchlist, setLunchList] = useState([]);
   const [Dinnerlist, setDinnerList] = useState([]);
-
-  
 
   useEffect(() => {
     console.log(Breakfastlist);
@@ -95,31 +90,45 @@ function LandingPage() {
     }
   };
 
+  const deletebfElement = (e) => {
+    // console.log(e)
+    const index = e.target.parentNode.getAttribute("key");
+    const updatedList = [...Breakfastlist];
+    updatedList.splice(Breakfastlist.length - index - 1, 1);
+    setBreakfastList(updatedList);
+  };
 
-
-  const deletebfElement =(e)=>{
-  // console.log(e)
-  const index = e.target.parentNode.getAttribute("key");
-  const updatedList = [...Breakfastlist];
-  updatedList.splice(Breakfastlist.length-index-1, 1);
-  setBreakfastList(updatedList);
-  }
-
-  const deletelhElement =(e)=>{
+  const deletelhElement = (e) => {
     // console.log(e)
     const index = e.target.parentNode.getAttribute("key");
     const updatedList = [...Lunchlist];
-    updatedList.splice(Lunchlist.length-index-1, 1);
+    updatedList.splice(Lunchlist.length - index - 1, 1);
     setLunchList(updatedList);
-    }
+  };
 
-    const deletedrElement =(e)=>{
-      // console.log(e)
-      const index = e.target.parentNode.getAttribute("key");
-      const updatedList = [...Dinnerlist];
-      updatedList.splice(Dinnerlist.length-index-1, 1);
-      setDinnerList(updatedList);
-      }
+  const deletedrElement = (e) => {
+    // console.log(e)
+    const index = e.target.parentNode.getAttribute("key");
+    const updatedList = [...Dinnerlist];
+    updatedList.splice(Dinnerlist.length - index - 1, 1);
+    setDinnerList(updatedList);
+  };
+
+  const updateQuantitybf = (index, value) => {
+    const updatedList = [...Breakfastlist];
+    updatedList[index].quantity = value;
+    setBreakfastList(updatedList);
+  }
+  const updateQuantitylh = (index, value) => {
+    const updatedList = [...Lunchlist];
+    updatedList[index].quantity = value;
+    setLunchList(updatedList);
+  }
+  const updateQuantitydr = (index, value) => {
+    const updatedList = [...Dinnerlist];
+    updatedList[index].quantity = value;
+    setDinnerList(updatedList);
+  }
 
   return (
     <div>
@@ -142,15 +151,64 @@ function LandingPage() {
           <div className="additems">
             <p>breakfast</p>
             <button onClick={() => changeBreakfast()}>+</button>
+            <div>
+              {Breakfastlist.map((item, index) => (
+                <div key={index}>
+                  <h3>{item.name}</h3>
+                  <p>quantity</p>
+                  <p>{item.quantity}</p>
+                  <button onClick={(e) => deletebfElement(e)}>delete</button>
+                  {/* <p>Protein: {item.protein}</p>
+                                  <p>Carbs: {item.carbs}</p>
+                                  <p>Fat: {item.fat}</p> */}
+                </div>
+              ))}
+            </div>
           </div>
           <div className="additems">
             <p>lunch</p>
             <button onClick={() => changeLunch()}>+</button>
+            <div>
+              {Lunchlist.map((item, index) => (
+                <div key={index}>
+                  <h3>{item.name}</h3>
+                  <p>quantity</p>
+                  <p>{item.quantity}</p>
+                  <button onClick={(e) => deletelhElement(e)}>delete</button>
+                  {/* <p>Protein: {item.protein}</p>
+                                  <p>Carbs: {item.carbs}</p>
+                                  <p>Fat: {item.fat}</p> */}
+                </div>
+              ))}
+            </div>
           </div>
           <div className="additems">
             <p>dinner</p>
             <button onClick={() => changeDinner()}>+</button>
+            <div>
+              {Dinnerlist.map((item, index) => (
+                <div key={index}>
+                  <h3>{item.name}</h3>
+                  <p>quantity</p>
+                  <p>{item.quantity}</p>
+                  <button onClick={(e) => deletedrElement(e)}>delete</button>
+                </div>
+              ))}
+            </div>
           </div>
+          <button
+            onClick={() => {
+              navigate("/Calculate", {
+                state: {
+                  Breakfastlist: Breakfastlist,
+                  Lunchlist: Lunchlist,
+                  Dinnerlist: Dinnerlist,
+                },
+              });
+            }}
+          >
+            calculate
+          </button>
         </div>
         <div
           className="Breakfast"
@@ -169,12 +227,17 @@ function LandingPage() {
             <div>
               {Breakfastlist.map((item, index) => (
                 <div key={index}>
-                  <h3>{item.name}</h3>
-                  <button onClick={(e)=>deletebfElement(e)} >delete</button>
-                  {/* <p>Protein: {item.protein}</p>
-                                  <p>Carbs: {item.carbs}</p>
-                                  <p>Fat: {item.fat}</p> */}
+                  <ul>
+                    <li>{item.name}</li>
+                    <p>quantity</p>
+                    <input type="text" onChange={(e) => updateQuantitybf(index, e.target.value)} />
+                  </ul>
                 </div>
+              ))}
+            </div>
+            <div>
+              {data.map((item) => (
+                <p>{item.name}</p>
               ))}
             </div>
           </div>
@@ -196,12 +259,15 @@ function LandingPage() {
             <div>
               {Lunchlist.map((item, index) => (
                 <div key={index}>
-                  <h3>{item.name}</h3>
-                  <button onClick={(e)=>deletelhElement(e)} >delete</button>
-                  {/* <p>Protein: {item.protein}</p>
-                                  <p>Carbs: {item.carbs}</p>
-                                  <p>Fat: {item.fat}</p> */}
+                  <li>{item.name}</li>
+                  <p>quantity</p>
+                    <input type="text" defaultValue='1' onChange={(e) => updateQuantitylh(index, e.target.value)} />
                 </div>
+              ))}
+            </div>
+            <div>
+              {data.map((item) => (
+                <p>{item.name}</p>
               ))}
             </div>
           </div>
@@ -223,28 +289,21 @@ function LandingPage() {
             <div>
               {Dinnerlist.map((item, index) => (
                 <div key={index}>
-                  <h3>{item.name}</h3>
-                  <button onClick={(e)=>deletedrElement(e)}>delete</button>
-                  {/* <p>Protein: {item.protein}</p>
-                                  <p>Carbs: {item.carbs}</p>
-                                  <p>Fat: {item.fat}</p> */}
+                  <li>{item.name}</li>
+                  <p>quantity</p>
+                    <input type="text" defaultValue='1' onChange={(e) => updateQuantitydr(index, e.target.value)} />
                 </div>
+              ))}
+            </div>
+            <div>
+              {data.map((item) => (
+                <p>{item.name}</p>
               ))}
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <button onClick={()=>{
-          navigate("/Calculate", {
-            state: {
-              Breakfastlist: Breakfastlist,
-              Lunchlist:Lunchlist,
-              Dinnerlist:Dinnerlist
-            }
-          })
-        }}>calculate</button>
-      </div>
+      <div></div>
     </div>
   );
 }

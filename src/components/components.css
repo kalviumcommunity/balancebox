@@ -51,6 +51,7 @@
 }
 
 .left-text{
+    text-align: center;
     flex: 1;
 }
 
@@ -61,6 +62,8 @@
 .additems{
     display: flex;
     align-items: center;
+    justify-content: center;
+    background-color: rgb(130, 181, 181);
 }
 
 /* pages */
@@ -69,23 +72,35 @@
     height: 100vh;
     width: 100vw;
     background-color: gray;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     right: 0px;
-    opacity: 0.8;
+    opacity: 0.98;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
+    align-items: center;
 }
 .Breakfast-inner,.Lunch-inner,.Dinner-inner{
 display: flex;
 justify-content: center;
 align-items: flex-start;
 padding-top: 5vh;
-height: 50vh;
+height: 60vh;
+width: 70vw;
+margin: 20vh 15vw 20vh 15vw;
 opacity: 1;
-margin: 20vh 20vw 60vh 20vw;
-background-color: aquamarine;
+background-color: rgb(27, 244, 172);
 z-index: 3;}
+
+
+
+
+/* graph */
+.graph{
+    width: 100vw;
+    height: 20vh;
+    background-color: black;
+}
