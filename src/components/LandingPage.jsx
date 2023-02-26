@@ -8,10 +8,10 @@ import user from "./utils/Profile.png";
 function LandingPage() {
   const navigate = useNavigate();
   const data = [
-    { name: "alooparatha", protein: 5, carbs: 10, fat: 0 ,quantity:1},
-    { name: "bread", protein: 8, carbs: 60, fat: 8 ,quantity:1},
-    { name: "tea", protein: 6, carbs: 16, fat: 7,quantity:1 },
-    { name: "apple", protein: 4, carbs: 106, fat: 57,quantity:1 },
+    { name: "alooparatha", protein: 5, carbs: 10, fat: 0, quantity: 1 },
+    { name: "bread", protein: 8, carbs: 60, fat: 8, quantity: 1 },
+    { name: "tea", protein: 6, carbs: 16, fat: 7, quantity: 1 },
+    { name: "apple", protein: 4, carbs: 106, fat: 57, quantity: 1 },
   ];
 
   // hooks
@@ -118,17 +118,17 @@ function LandingPage() {
     const updatedList = [...Breakfastlist];
     updatedList[index].quantity = value;
     setBreakfastList(updatedList);
-  }
+  };
   const updateQuantitylh = (index, value) => {
     const updatedList = [...Lunchlist];
     updatedList[index].quantity = value;
     setLunchList(updatedList);
-  }
+  };
   const updateQuantitydr = (index, value) => {
     const updatedList = [...Dinnerlist];
     updatedList[index].quantity = value;
     setDinnerList(updatedList);
-  }
+  };
 
   return (
     <div>
@@ -148,15 +148,19 @@ function LandingPage() {
           <span>choices.</span>
         </div>
         <div className="right-text">
-          <div className="additems">
+          <div className="add-button">
             <p>breakfast</p>
             <button onClick={() => changeBreakfast()}>+</button>
-            <div>
+          </div>
+          <div className="additems">
+            <div className="List">
               {Breakfastlist.map((item, index) => (
                 <div key={index}>
-                  <h3>{item.name}</h3>
-                  <p>quantity</p>
-                  <p>{item.quantity}</p>
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>x</p>
+                    <p>{item.quantity}</p>
+                  </div>
                   <button onClick={(e) => deletebfElement(e)}>delete</button>
                   {/* <p>Protein: {item.protein}</p>
                                   <p>Carbs: {item.carbs}</p>
@@ -165,15 +169,20 @@ function LandingPage() {
               ))}
             </div>
           </div>
-          <div className="additems">
+          <div className="add-button">
             <p>lunch</p>
             <button onClick={() => changeLunch()}>+</button>
-            <div>
+          </div>
+          <div className="additems">
+            <div className="List">
               {Lunchlist.map((item, index) => (
                 <div key={index}>
-                  <h3>{item.name}</h3>
-                  <p>quantity</p>
-                  <p>{item.quantity}</p>
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>x</p>
+                    <p>{item.quantity}</p>
+                  </div>
+
                   <button onClick={(e) => deletelhElement(e)}>delete</button>
                   {/* <p>Protein: {item.protein}</p>
                                   <p>Carbs: {item.carbs}</p>
@@ -182,21 +191,27 @@ function LandingPage() {
               ))}
             </div>
           </div>
-          <div className="additems">
+          <div className="add-button">
             <p>dinner</p>
             <button onClick={() => changeDinner()}>+</button>
-            <div>
+          </div>
+          <div className="additems">
+            <div className="List">
               {Dinnerlist.map((item, index) => (
                 <div key={index}>
-                  <h3>{item.name}</h3>
-                  <p>quantity</p>
-                  <p>{item.quantity}</p>
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>x</p>
+                    <p>{item.quantity}</p>
+                  </div>
+
                   <button onClick={(e) => deletedrElement(e)}>delete</button>
                 </div>
               ))}
             </div>
           </div>
           <button
+            className="calculate"
             onClick={() => {
               navigate("/Calculate", {
                 state: {
@@ -216,28 +231,34 @@ function LandingPage() {
           style={{ display: `${breakfast}` }}
         >
           <div className="Breakfast-inner">
-            <input
-              type="searchbar"
-              className="searchbar"
-              placeholder="search"
-              value={searched}
-              onChange={changeHandler}
-            />
-            <button onClick={() => searchBreakfast()}>Add</button>
+            <div className="searchbar">
+              <input
+                type="searchbar"
+                placeholder="search"
+                value={searched}
+                onChange={changeHandler}
+              />
+              <button onClick={() => searchBreakfast()}>Add</button>
+            </div>
+            <div className="foodList">
+              {data.map((item) => (
+                <p>{item.name}</p>
+              ))}
+            </div>
             <div>
               {Breakfastlist.map((item, index) => (
                 <div key={index}>
                   <ul>
                     <li>{item.name}</li>
-                    <p>quantity</p>
-                    <input type="text" onChange={(e) => updateQuantitybf(index, e.target.value)} />
+                    <p>quantity:</p>
+                    <input
+                      type="number"
+                      defaultValue={1}
+                      min={1}
+                      onChange={(e) => updateQuantitybf(index, e.target.value)}
+                    />
                   </ul>
                 </div>
-              ))}
-            </div>
-            <div>
-              {data.map((item) => (
-                <p>{item.name}</p>
               ))}
             </div>
           </div>
@@ -248,26 +269,35 @@ function LandingPage() {
           style={{ display: `${lunch}` }}
         >
           <div className="Lunch-inner">
-            <input
-              type="searchbar"
-              className="searchbar"
-              value={searched}
-              placeholder="search"
-              onChange={changeHandler}
-            />
-            <button onClick={() => searchLunch()}>Add</button>
-            <div>
-              {Lunchlist.map((item, index) => (
-                <div key={index}>
-                  <li>{item.name}</li>
-                  <p>quantity</p>
-                    <input type="text" defaultValue='1' onChange={(e) => updateQuantitylh(index, e.target.value)} />
-                </div>
+            <div className="searchbar">
+              <input
+                type="searchbar"
+                value={searched}
+                placeholder="search"
+                onChange={changeHandler}
+              />
+              <button onClick={() => searchLunch()}>Add</button>
+            </div>
+
+            <div className="foodList">
+              {data.map((item) => (
+                <p>{item.name}</p>
               ))}
             </div>
             <div>
-              {data.map((item) => (
-                <p>{item.name}</p>
+              {Lunchlist.map((item, index) => (
+                <div key={index}>
+                  <ul>
+                    <li>{item.name}</li>
+                    <p>quantity</p>
+                    <input
+                      type="number"
+                      defaultValue={1}
+                      min={1}
+                      onChange={(e) => updateQuantitylh(index, e.target.value)}
+                    />
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
@@ -278,26 +308,35 @@ function LandingPage() {
           style={{ display: `${dinner}` }}
         >
           <div className="Dinner-inner">
-            <input
-              type="searchbar"
-              className="searchbar"
-              value={searched}
-              placeholder="search"
-              onChange={changeHandler}
-            />
-            <button onClick={() => searchDinner()}>Add</button>
+            <div className="searchbar">
+              <input
+                type="searchbar"
+                value={searched}
+                placeholder="search"
+                onChange={changeHandler}
+              />
+              <button onClick={() => searchDinner()}>Add</button>
+            </div>
+            <div className="foodList">
+              {data.map((item) => (
+                <p>{item.name}</p>
+              ))}
+            </div>{" "}
             <div>
               {Dinnerlist.map((item, index) => (
                 <div key={index}>
-                  <li>{item.name}</li>
-                  <p>quantity</p>
-                    <input type="text" defaultValue='1' onChange={(e) => updateQuantitydr(index, e.target.value)} />
+                  <ul>
+                    {" "}
+                    <li>{item.name}</li>
+                    <p>quantity</p>
+                    <input
+                      type="number"
+                      defaultValue={1}
+                      min={1}
+                      onChange={(e) => updateQuantitydr(index, e.target.value)}
+                    />
+                  </ul>
                 </div>
-              ))}
-            </div>
-            <div>
-              {data.map((item) => (
-                <p>{item.name}</p>
               ))}
             </div>
           </div>
