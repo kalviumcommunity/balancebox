@@ -313,7 +313,7 @@ p{
 }
 
 
-@media all and (max-width:360px){
+@media all and (max-width:420px){
     body{
         overflow-x: hidden;
     }
