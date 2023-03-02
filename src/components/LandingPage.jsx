@@ -130,6 +130,9 @@ function LandingPage() {
     updatedList[index].quantity = value;
     setDinnerList(updatedList);
   };
+  const selectItem = (e)=>{
+    setsearched(e.target.outerText)
+  }
 
   return (
     <div>
@@ -256,7 +259,7 @@ function LandingPage() {
             </div>
             <div className="foodList">
               {data.map((item) => (
-                <p>{item.name}</p>
+                <p onClick={(e)=>selectItem(e)} >{item.name}</p>
               ))}
             </div>
             <div>
@@ -295,7 +298,7 @@ function LandingPage() {
 
             <div className="foodList">
               {data.map((item) => (
-                <p>{item.name}</p>
+                <p onClick={(e)=>selectItem(e)}>{item.name}</p>
               ))}
             </div>
             <div>
@@ -333,7 +336,7 @@ function LandingPage() {
             </div>
             <div className="foodList">
               {data.map((item) => (
-                <p>{item.name}</p>
+                <p onClick={(e)=>selectItem(e)}>{item.name}</p>
               ))}
             </div>{" "}
             <div>
