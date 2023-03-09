@@ -251,11 +251,11 @@ function LandingPage() {
             <div className="searchbar">
               <input
                 type="searchbar"
-                placeholder="search"
+                placeholder="Search and Add"
                 value={searched}
                 onChange={changeHandler}
               />
-              <button onClick={() => searchBreakfast()}>Add</button>
+              <button onClick={() => searchBreakfast()}>+</button>
             </div>
             <div className="foodList">
               {data.map((item) => (
@@ -290,10 +290,10 @@ function LandingPage() {
               <input
                 type="searchbar"
                 value={searched}
-                placeholder="search"
+                placeholder="Search and Add"
                 onChange={changeHandler}
               />
-              <button onClick={() => searchLunch()}>Add</button>
+              <button onClick={() => searchLunch()}>+</button>
             </div>
 
             <div className="foodList">
@@ -329,10 +329,10 @@ function LandingPage() {
               <input
                 type="searchbar"
                 value={searched}
-                placeholder="search"
+                placeholder="Search and Add"
                 onChange={changeHandler}
               />
-              <button onClick={() => searchDinner()}>Add</button>
+              <button onClick={() => searchDinner()}>+</button>
             </div>
             <div className="foodList">
               {data.map((item) => (

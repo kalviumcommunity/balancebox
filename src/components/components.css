@@ -31,6 +31,7 @@ body {
     border-radius: 2px;
     box-shadow: 4px 5px 1px rgb(0, 183, 255);
     transition: 0.15s;
+    font-family: 'Poppins';
 }
 .login:hover{
     color: rgb(25, 0, 255);
@@ -197,7 +198,8 @@ body {
 .Breakfast,.Lunch,.Dinner{
     height: 100vh;
     width: 100vw;
-    background-color: gray;
+    /* background-color: rgb(91, 81, 126); */
+    background-image: linear-gradient(to bottom right, #071f42, #3b5c7d, #84b4e3);
     position: fixed;
     top: 0px;
     left: 0px;
@@ -214,13 +216,15 @@ display: flex;
 justify-content: flex-start;
 align-items: center;
 padding-top: 5vh;
-height: 60vh;
+height: 70vh;
 width: 70vw;
 margin: 20vh 15vw 20vh 15vw;
 opacity: 1;
-background-color: rgb(27, 244, 172);
 z-index: 3;
-flex-direction: column;}
+flex-direction: column;
+box-shadow: 2px 2px 1px rgb(68, 68, 68);
+background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
+}
 
 .calculate{
     background-image: radial-gradient(circle at center, #0813e3, #01015c);
@@ -242,8 +246,29 @@ flex-direction: column;}
     display: flex;
     overflow-x: scroll;
     width: 40vw;
-    padding: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: rgb(93, 121, 213);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Poppins';
 }
+
+.foodList::-webkit-scrollbar {
+    width: 8px; /* width of the scrollbar */
+}
+
+.foodList::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1); /* color of the track */
+}
+
+.foodList::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.5); /* color of the scrollbar */
+    border-radius: 10px; /* roundness of the scrollbar */
+}
+
+
+
 .foodList>p{
     margin-right: 10px;
 }
@@ -260,27 +285,50 @@ ul>input{
 }
 ul>p{margin : 5px;}
 
-.searchbar{
-    background-color: white;
+.searchbar {
+    display: flex;
+    align-items: center;
     width: 30vw;
+    height: 40px;
+    padding: 0px;
+    background-color: #fcf8f8;
+    border-radius: 20px;
+}
+
+.searchbar>input{
+    flex: 1;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-family: inherit;
+    color: #333;
+    border-radius: 20px;
+}
+
+.searchbar>button{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    border: none;
+    background-color: #4d94ff;
+    color: white;
+    font-size: 38px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
     display: flex;
     justify-content: center;
-    height: 32px;
     align-items: center;
-    border-radius: 8px;
+    font-family: 'Poppins';
 }
-.searchbar>input{
-    border: none;
-    width: 27vw;
-    height: 30px;
-    border-radius: 10px;
+
+.searchbar>button:hover {
+    background-color: #3c82d6;
+    font-size: 45px;
 }
-.searchbar>button{
-    border: none;
-    width: 3vw;
-    height: 32px;
-    border-radius: 10px;
-}
+
 
 
 
