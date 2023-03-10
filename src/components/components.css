@@ -313,6 +313,7 @@ ul>p{margin : 5px;}
 
 .innerList{
     overflow-y: scroll;
+    height: 300px;
 }
 
 .searchbar {
