@@ -345,7 +345,7 @@ function LandingPage() {
                 <p onClick={(e)=>selectItem(e)} >{item.name}</p>
                 </div>))}
             </div>{" "}
-            <div>
+            <div className="innerList">
               {Dinnerlist.map((item, index) => (
                 <div key={index}>
                   <ul>

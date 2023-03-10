@@ -317,7 +317,9 @@ ul>input{
 
 ul>p{margin : 5px;}
 
-
+.innerList{
+    overflow-y: scroll;
+}
 
 .searchbar {
     display: flex;
