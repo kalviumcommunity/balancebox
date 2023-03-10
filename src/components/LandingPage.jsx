@@ -256,6 +256,7 @@ function LandingPage() {
               />
               <button onClick={() => searchBreakfast()}>+</button>
             </div>
+            <div>
             <div className="foodList">
               {data.map((item) => (<div>
                 <img onClick={(e)=>selectImage(e)} src={item.image} alt={item.name} className='modal-image'/>
@@ -263,6 +264,8 @@ function LandingPage() {
                 </div>
               ))}
             </div>
+            </div>
+            
             <div>
               {Breakfastlist.map((item, index) => (
                 <div key={index}>

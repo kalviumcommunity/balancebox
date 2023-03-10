@@ -1,16 +1,51 @@
-export const data = [{
-    name: "Apple",
-    image:'https://5.imimg.com/data5/SELLER/Default/2021/8/YN/SE/FV/72826034/red-apple-500x500.jpg',
-    protein: 0.3,
-    fat: 0.2,
-    carbs: 14,
-    quantity: 1
-},
-{
-    name: "Banana",
-    image:'https://img.freepik.com/free-photo/bananas_1339-1187.jpg?w=900&t=st=1678441654~exp=1678442254~hmac=9b0977b5f5de125c810bb87524addce47716ac81b6e1f2d34467d7ab888f421f',
-    protein: 1.1,
-    fat: 0.3,
-    carbs: 23,
-    quantity: 1
-}]
+export const data = [
+    {
+      name: "Chicken Tikka Masala",
+      image: "https://www.indianhealthyrecipes.com/wp-content/uploads/2022/06/chicken-tikka-masala.jpg",
+      protein: 31,
+      fat: 18,
+      carbs: 16,
+      quantity: 1
+    },
+    {
+      name: "Palak Paneer",
+      image: "https://healthynibblesandbits.com/wp-content/uploads/2020/01/Saag-Paneer-FF.jpg",
+      protein: 17,
+      fat: 13,
+      carbs: 13,
+      quantity: 1
+    },
+    {
+      name: "Samosa",
+      image: "https://www.cubesnjuliennes.com/wp-content/uploads/2020/08/Best-Indian-Punjabi-Samosa-1.jpg",
+      protein: 4,
+      fat: 11,
+      carbs: 24,
+      quantity: 1
+    },
+    {
+      name: "Naan",
+      image: "https://www.vegrecipesofindia.com/wp-content/uploads/2022/12/garlic-naan-1.jpg",
+      protein: 6,
+      fat: 7,
+      carbs: 56,
+      quantity: 1
+    },
+    {
+      name: "Butter Chicken",
+      image: "https://images.immediate.co.uk/production/volatile/sites/30/2021/02/butter-chicken-ac2ff98.jpg?quality=90&webp=true&resize=375,341",
+      protein: 30,
+      fat: 24,
+      carbs: 10,
+      quantity: 1
+    },
+    {
+      name: "Chana Masala",
+      image: "https://www.indianveggiedelight.com/wp-content/uploads/2019/05/chana-masala-instant-pot-feature-image.jpg",
+      protein: 11,
+      fat: 8,
+      carbs: 34,
+      quantity: 1
+    }
+  ];
+  

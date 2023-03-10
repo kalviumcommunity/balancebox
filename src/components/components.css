@@ -179,16 +179,20 @@ body {
     display: flex;
     align-items: center;
     margin: 0px 2vw 0vh 2vw;
-    padding: 0px 5px;
+    padding: 5px;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 10px;
     height: 50px;
-    justify-content: flex-start;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 0.8em;
+    /* justify-content: flex-start; */
 }
 .List>div>div{
     display: flex;
     margin-right: 8px;
     align-items: center;
+    word-wrap: break-word;
 }
 .List>div>button{
     border: none;
@@ -273,6 +277,7 @@ background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
 
 .foodList>p{
     margin-right: 10px;
+    /* cursor: pointer; */
 }
 .foodList>div{
     display: flex;
@@ -280,7 +285,7 @@ background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
     justify-content: center;
     align-items: center;
     margin-right: 2vw;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 .modal-image{
@@ -288,6 +293,7 @@ background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
     height: 10vw;
     /* margin-right: 2vw; */
     border-radius: 10px;
+    cursor: pointer;
 }
 
 ul{
@@ -311,9 +317,7 @@ ul>input{
 
 ul>p{margin : 5px;}
 
-.innerList{
-    overflow-y: scroll;
-}
+
 
 .searchbar {
     display: flex;
