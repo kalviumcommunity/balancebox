@@ -113,10 +113,11 @@ body {
     background-color: rgb(213, 241, 243);
     margin: 0vh 1vw 2vh 1vw;
     flex-direction: column;
-    padding: 2vh 1vw 2vh 1vw;
+    padding: 0vh 1vw 10vh 1vw;
     overflow-x:scroll;
     width: 37vw;
     border-radius: 0px 0px 5px 5px;
+    overflow-y: hidden;
 }
 .additems::-webkit-scrollbar {
     width: 5px;
@@ -170,6 +171,7 @@ body {
 .List{
     display: flex;
     justify-content:space-around   ;
+    padding-left: 20vw;
 
 }
 
@@ -272,18 +274,46 @@ background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
 .foodList>p{
     margin-right: 10px;
 }
+.foodList>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2vw;
+    overflow-y: hidden;
+}
+
+.modal-image{
+    width: 10vw;
+    height: 10vw;
+    /* margin-right: 2vw; */
+    border-radius: 10px;
+}
 
 ul{
     display: flex;
     width: 35vw;
     justify-content: flex-start;
     align-items: center;
+
 }
+
 ul>input{
     width: 32px;
-    border: 0.5px solid ;
+    border: 0.5px solid #ccc;
+    font-size: 16px;
+    padding: 4px;
+    background-color: #a5acf7;
+    cursor: pointer;
+    border-radius:15px;
+    margin-top: 0.8vh;
 }
+
 ul>p{margin : 5px;}
+
+.innerList{
+    overflow-y: scroll;
+}
 
 .searchbar {
     display: flex;
@@ -354,6 +384,7 @@ ul>p{margin : 5px;}
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 
 
 p{

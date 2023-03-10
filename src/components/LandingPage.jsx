@@ -8,12 +8,7 @@ import { data } from "./data.js";
 function LandingPage() {
   const navigate = useNavigate();
   console.log(data);
-  // const data = [
-  //   { name: "alooparatha", protein: 5, carbs: 10, fat: 0, quantity: 1 },
-  //   { name: "bread", protein: 8, carbs: 60, fat: 8, quantity: 1 },
-  //   { name: "tea", protein: 6, carbs: 16, fat: 7, quantity: 1 },
-  //   { name: "apple", protein: 4, carbs: 106, fat: 57, quantity: 1 },
-  // ];
+
 
   // hooks
   const [breakfast, setbreakfast] = useState("none");
@@ -131,7 +126,11 @@ function LandingPage() {
     setDinnerList(updatedList);
   };
   const selectItem = (e)=>{
+    console.log(e)
     setsearched(e.target.outerText)
+  }
+  const selectImage = (e)=>{
+    setsearched(e.target.alt)
   }
 
   return (
@@ -258,8 +257,10 @@ function LandingPage() {
               <button onClick={() => searchBreakfast()}>+</button>
             </div>
             <div className="foodList">
-              {data.map((item) => (
+              {data.map((item) => (<div>
+                <img onClick={(e)=>selectImage(e)} src={item.image} alt={item.name} className='modal-image'/>
                 <p onClick={(e)=>selectItem(e)} >{item.name}</p>
+                </div>
               ))}
             </div>
             <div>
@@ -297,9 +298,10 @@ function LandingPage() {
             </div>
 
             <div className="foodList">
-              {data.map((item) => (
-                <p onClick={(e)=>selectItem(e)}>{item.name}</p>
-              ))}
+              {data.map((item) => (<div>
+                <img onClick={(e)=>selectImage(e)} src={item.image} alt={item.name} className='modal-image'/>
+                <p onClick={(e)=>selectItem(e)} >{item.name}</p>
+                </div>))}
             </div>
             <div>
               {Lunchlist.map((item, index) => (
@@ -335,9 +337,10 @@ function LandingPage() {
               <button onClick={() => searchDinner()}>+</button>
             </div>
             <div className="foodList">
-              {data.map((item) => (
-                <p onClick={(e)=>selectItem(e)}>{item.name}</p>
-              ))}
+              {data.map((item) => (<div>
+                <img onClick={(e)=>selectImage(e)} src={item.image} alt={item.name} className='modal-image'/>
+                <p onClick={(e)=>selectItem(e)} >{item.name}</p>
+                </div>))}
             </div>{" "}
             <div>
               {Dinnerlist.map((item, index) => (
