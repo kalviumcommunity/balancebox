@@ -111,13 +111,12 @@ body {
     align-items: center;
     justify-content: flex-start;
     background-color: rgb(213, 241, 243);
-    margin: 0vh 1vw 2vh 1vw;
     flex-direction: column;
-    padding: 0vh 1vw 10vh 1vw;
     overflow-x:scroll;
-    width: 37vw;
     border-radius: 0px 0px 5px 5px;
     overflow-y: hidden;
+    width: 39vw;
+    height: 10vh;
 }
 .additems::-webkit-scrollbar {
     width: 5px;
@@ -170,33 +169,32 @@ body {
 
 .List{
     display: flex;
-    justify-content:space-around   ;
-    padding-left: 20vw;
-
 }
 
 .List>div{
     display: flex;
     align-items: center;
     margin: 0px 2vw 0vh 2vw;
-    padding: 5px;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 10px;
     height: 50px;
     overflow: hidden;
     word-wrap: break-word;
-    font-size: 0.8em;
-    /* justify-content: flex-start; */
+    font-size: 0.7em;
+    padding: 0vw 0vw 0vw 1vw;
+
 }
 .List>div>div{
     display: flex;
-    margin-right: 8px;
+    margin-right: 2vw;
     align-items: center;
     word-wrap: break-word;
 }
-.List>div>button{
+
+.List>div>div>button{
+    background-color: #d3f5fc;
     border: none;
-    background-color: rgb(213, 241, 243);
+    margin-left: 1vw;
 }
 
 /* pages */
@@ -319,6 +317,12 @@ ul>p{margin : 5px;}
 
 .innerList{
     overflow-y: scroll;
+    height: 300px;
+
+}
+
+.innerList::-webkit-scrollbar{
+    display: none;
 }
 
 .searchbar {
