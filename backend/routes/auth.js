@@ -7,6 +7,16 @@ router.get("/", (req, res) => {
   res.send("Home");
 });
 
+router.get("/get-food",async (req, res) => {
+  try {
+    const data = await Food.find({});
+    console.log(data)
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+})
+
 router.post("/add-food", async (req, res) => {
     const { name, image, protien, fat, carbs,quantity } = req.body;
     try {

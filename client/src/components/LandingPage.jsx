@@ -22,6 +22,22 @@ function LandingPage() {
     console.log(Breakfastlist);
     console.log(Lunchlist);
     console.log(Dinnerlist);
+    const getCourse = async () => {
+      try {
+        const res = await fetch('https://balancebox.onrender.com/get-food');
+        const data = await res.json();
+
+        if (data.status === 422 || data.status === 500) {
+          alert(data.error);
+          return data.error;
+        }
+
+       console.log("Data: ",data)
+      } catch (err) {
+        return "An erros occured: " + err;
+      }
+    };
+    getCourse()
   }, [Breakfastlist, Lunchlist, Dinnerlist]);
 
   // to display modal
