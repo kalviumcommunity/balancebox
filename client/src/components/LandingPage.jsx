@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./components.css";
-import logo from "./utils/logo.png";
-import userimg from "./utils/Profile.png";
+// import logo from "../../public/logo.png";
+// import userimg from "";
 // import { data } from "./data.js";
 function LandingPage() {
   const navigate = useNavigate();
@@ -162,10 +162,12 @@ function LandingPage() {
     setsearched(e.target.alt);
   };
 
+
+
   return (
     <div>
       <div className="navbar">
-        <img src={logo} className="logo" alt="logo" />
+        <img src={`./logo.png`} className="logo" alt="logo" />
         <div className="user-login">
           {
             isAuthenticated?(
@@ -176,7 +178,7 @@ function LandingPage() {
           {
             isAuthenticated?(<img src={user.picture} alt="" className="user" />
             ):(
-              <img src={userimg} alt="" className="user" />
+              <img src={`./Profile.png`} alt="" className="user" />
             )
           }
         </div>
