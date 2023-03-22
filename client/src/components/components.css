@@ -111,12 +111,12 @@ body {
     align-items: center;
     justify-content: flex-start;
     background-color: rgb(213, 241, 243);
-    margin: 0vh 1vw 2vh 1vw;
     flex-direction: column;
-    padding: 2vh 1vw 2vh 1vw;
     overflow-x:scroll;
-    width: 37vw;
     border-radius: 0px 0px 5px 5px;
+    overflow-y: hidden;
+    width: 39vw;
+    height: 10vh;
 }
 .additems::-webkit-scrollbar {
     width: 5px;
@@ -169,28 +169,32 @@ body {
 
 .List{
     display: flex;
-    justify-content:space-around   ;
-
 }
 
 .List>div{
     display: flex;
     align-items: center;
     margin: 0px 2vw 0vh 2vw;
-    padding: 0px 5px;
     border: 2px solid rgb(0, 0, 0);
     border-radius: 10px;
     height: 50px;
-    justify-content: flex-start;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 0.7em;
+    padding: 0vw 0vw 0vw 1vw;
+
 }
 .List>div>div{
     display: flex;
-    margin-right: 8px;
+    margin-right: 2vw;
     align-items: center;
+    word-wrap: break-word;
 }
-.List>div>button{
+
+.List>div>div>button{
+    background-color: #d3f5fc;
     border: none;
-    background-color: rgb(213, 241, 243);
+    margin-left: 1vw;
 }
 
 /* pages */
@@ -271,6 +275,23 @@ background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
 
 .foodList>p{
     margin-right: 10px;
+    /* cursor: pointer; */
+}
+.foodList>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2vw;
+    /* overflow-y: hidden; */
+}
+
+.modal-image{
+    width: 10vw;
+    height: 10vw;
+    /* margin-right: 2vw; */
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 ul{
@@ -278,12 +299,30 @@ ul{
     width: 35vw;
     justify-content: flex-start;
     align-items: center;
+
 }
+
 ul>input{
     width: 32px;
-    border: 0.5px solid ;
+    border: 0.5px solid #ccc;
+    font-size: 16px;
+    padding: 4px;
+    background-color: #a5acf7;
+    cursor: pointer;
+    border-radius:15px;
+    margin-top: 0.8vh;
 }
+
 ul>p{margin : 5px;}
+
+.innerList{
+    overflow-y: scroll;
+    height: 200px;
+}
+
+/* .innerList::-webkit-scrollbar{
+    display: none;
+} */
 
 .searchbar {
     display: flex;
@@ -354,6 +393,7 @@ ul>p{margin : 5px;}
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 
 
 p{

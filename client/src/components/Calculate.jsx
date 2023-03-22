@@ -26,7 +26,8 @@ function Calculate() {
     let totalCarbs = 0;
 
     data.reduce((acc, curr) => {
-      totalProtein += curr.protein * parseInt(curr.quantity);
+      console.log(curr)
+      totalProtein += curr.protien * parseInt(curr.quantity);
       totalFat += curr.fat * parseInt(curr.quantity);
       totalCarbs += curr.carbs * parseInt(curr.quantity);
       return acc;
@@ -105,7 +106,7 @@ function Calculate() {
                 key={index}
               >
                 <h3>{item.name}</h3>
-                <p>Protein: {item.protein * item.quantity}</p>
+                <p>Protein: {item.protien * item.quantity}</p>
                 <p>Carbs: {item.carbs * item.quantity}</p>
                 <p>Fat: {item.fat * item.quantity}</p>
               </div>
@@ -121,7 +122,7 @@ function Calculate() {
                 key={index}
               >
                 <h3>{item.name}</h3>
-                <p>Protein: {item.protein * item.quantity}</p>
+                <p>Protein: {item.protien * item.quantity}</p>
                 <p>Carbs: {item.carbs * item.quantity}</p>
                 <p>Fat: {item.fat * item.quantity}</p>
               </div>
@@ -137,7 +138,7 @@ function Calculate() {
                 key={index}
               >
                 <h3>{item.name}</h3>
-                <p>Protein: {item.protein * item.quantity}</p>
+                <p>Protein: {item.protien * item.quantity}</p>
                 <p>Carbs: {item.carbs * item.quantity}</p>
                 <p>Fat: {item.fat * item.quantity}</p>
               </div>

@@ -1,19 +1,20 @@
-const express = require('express')
-// const dotenv = require('dotenv').config()
-const port = process.env.PORT || 5000
-const {errorHandler} = require('./middleware/errorMiddleware')
-const app = express()
+const express = require("express");
+const dotenv = require("dotenv");
+const app = express();
+const cors = require("cors");
 
-const mongoose = require('mongoose')
+app.use(cors());
 
-mongoose.connect(process.env.MONGO_URI)
-//create model
+dotenv.config({ path: "./.env" });
 
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
+require("./db/conn");
 
-app.use('/api/goals',require('./routes/goalRoutes'))
+app.use(express.json());
 
-app.use(errorHandler)
+app.use(require("./routes/auth"));
 
-app.listen(port,()=>{console.log(`${port}`)})
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running at port ${PORT}`);
+});
