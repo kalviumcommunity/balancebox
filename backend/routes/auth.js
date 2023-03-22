@@ -9,8 +9,8 @@ router.get("/", (req, res) => {
 
 router.get("/get-food",async (req, res) => {
   try {
-    const data = await Food.find({});
-    console.log(data)
+    const data = await Food.find();
+    // console.log(data)
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });

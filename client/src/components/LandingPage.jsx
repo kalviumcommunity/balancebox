@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import "./components.css";
 import logo from "./utils/logo.png";
 import user from "./utils/Profile.png";
-import { data } from "./data.js";
+// import { data } from "./data.js";
 function LandingPage() {
   const navigate = useNavigate();
-  console.log(data);
+  // console.log(data);
 
   // hooks
   const [breakfast, setbreakfast] = useState("none");
@@ -17,15 +17,19 @@ function LandingPage() {
   const [Breakfastlist, setBreakfastList] = useState([]);
   const [Lunchlist, setLunchList] = useState([]);
   const [Dinnerlist, setDinnerList] = useState([]);
+  const [data,setData] = useState([])
 
   useEffect(() => {
-    console.log(Breakfastlist);
-    console.log(Lunchlist);
-    console.log(Dinnerlist);
+    // console.log(Breakfastlist);
+    // console.log(Lunchlist);
+    // console.log(Dinnerlist);
     const getCourse = async () => {
       try {
-        const res = await fetch('https://balancebox.onrender.com/get-food');
-        const data = await res.json();
+        // const res = await fetch('https://balancebox.onrender.com/get-food');
+        const res = await fetch('http://localhost:5000/get-food')
+        const datad = await res.json();
+        console.log('res')
+        setData(datad);
 
         if (data.status === 422 || data.status === 500) {
           alert(data.error);
@@ -38,7 +42,7 @@ function LandingPage() {
       }
     };
     getCourse()
-  }, [Breakfastlist, Lunchlist, Dinnerlist]);
+  }, [Breakfastlist, Lunchlist, Dinnerlist, data]);
 
   // to display modal
   const changeBreakfast = () => {
@@ -141,7 +145,7 @@ function LandingPage() {
     setDinnerList(updatedList);
   };
   const selectItem = (e) => {
-    console.log(e);
+    // console.log(e);
     setsearched(e.target.outerText);
   };
   const selectImage = (e) => {
@@ -289,8 +293,7 @@ function LandingPage() {
                 ))}
               </div>
             </div>
-
-            <div className="innerList">
+            {Breakfastlist.length>0 && <div className="innerList">
               {Breakfastlist.map((item, index) => (
                 <div key={index}>
                   <ul>
@@ -305,7 +308,7 @@ function LandingPage() {
                   </ul>
                 </div>
               ))}
-            </div>
+            </div>}
           </div>
         </div>
         <div
@@ -337,6 +340,7 @@ function LandingPage() {
                 </div>
               ))}
             </div>
+            {Lunchlist.length>0 &&
             <div className="innerList">
               {Lunchlist.map((item, index) => (
                 <div key={index}>
@@ -352,7 +356,7 @@ function LandingPage() {
                   </ul>
                 </div>
               ))}
-            </div>
+            </div>}
           </div>
         </div>
         <div
@@ -382,7 +386,7 @@ function LandingPage() {
                   <p onClick={(e) => selectItem(e)}>{item.name}</p>
                 </div>
               ))}
-            </div>{" "}
+            </div>{Dinnerlist.length>0&&
             <div className="innerList">
               {Dinnerlist.map((item, index) => (
                 <div key={index}>
@@ -399,7 +403,7 @@ function LandingPage() {
                   </ul>
                 </div>
               ))}
-            </div>
+            </div>}
           </div>
         </div>
       </div>

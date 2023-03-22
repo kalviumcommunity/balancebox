@@ -317,13 +317,12 @@ ul>p{margin : 5px;}
 
 .innerList{
     overflow-y: scroll;
-    height: 300px;
-
+    height: 200px;
 }
 
-.innerList::-webkit-scrollbar{
+/* .innerList::-webkit-scrollbar{
     display: none;
-}
+} */
 
 .searchbar {
     display: flex;
