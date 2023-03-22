@@ -8,8 +8,10 @@ import { Auth0Provider } from "@auth0/auth0-react";
 function App() {
   return (
     <Auth0Provider
-      domain="dev-njmaitf8k2yax3vn.us.auth0.com"
-      clientId="LD1pu4LdGmYuyBzR37YcR0fN4NxzcOOX"
+      // domain ="dev-njmaitf8k2yax3vn.us.auth0.com"
+      // clientId ="LD1pu4LdGmYuyBzR37YcR0fN4NxzcOOX"
+      clientId= {process.env.clientId}
+      domain={process.env.domain}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
