@@ -32,6 +32,7 @@ body {
     box-shadow: 4px 5px 1px rgb(0, 183, 255);
     transition: 0.15s;
     font-family: 'Poppins';
+    margin-right: 8px;
 }
 .login:hover{
     color: rgb(25, 0, 255);
@@ -230,6 +231,8 @@ box-shadow: 2px 2px 1px rgb(68, 68, 68);
 background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
 }
 
+
+
 .calculate{
     background-image: radial-gradient(circle at center, #0813e3, #01015c);
     border: 1px solid rgb(10, 10, 251);
@@ -239,6 +242,7 @@ background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
     font-size: 1.5em;
     color: white;
     font-family: 'Poppins';
+    margin-top: 10px;
 }
 
 .calculate:hover{
@@ -283,6 +287,7 @@ background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
     justify-content: center;
     align-items: center;
     margin-right: 2vw;
+    /* padding-bottom: 5px; */
     /* overflow-y: hidden; */
 }
 
@@ -323,6 +328,19 @@ ul>p{margin : 5px;}
 /* .innerList::-webkit-scrollbar{
     display: none;
 } */
+
+.innerList::-webkit-scrollbar {
+    width: 8px; /* width of the scrollbar */
+}
+
+.innerList::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1); /* color of the track */
+}
+
+.innerList::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.5); /* color of the scrollbar */
+    border-radius: 10px; /* roundness of the scrollbar */
+}
 
 .searchbar {
     display: flex;

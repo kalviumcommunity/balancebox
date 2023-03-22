@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./components.css";
 import logo from "./utils/logo.png";
-import user from "./utils/Profile.png";
+import userimg from "./utils/Profile.png";
 // import { data } from "./data.js";
 function LandingPage() {
   const navigate = useNavigate();
@@ -18,6 +19,10 @@ function LandingPage() {
   const [Lunchlist, setLunchList] = useState([]);
   const [Dinnerlist, setDinnerList] = useState([]);
   const [data,setData] = useState([])
+  const { loginWithRedirect, isAuthenticated, logout , user } = useAuth0();
+  // const { logout } = useAuth0();
+  // const { , isLoading } = useAuth0();
+  console.log(user)
 
   useEffect(() => {
     // console.log(Breakfastlist);
@@ -25,10 +30,10 @@ function LandingPage() {
     // console.log(Dinnerlist);
     const getCourse = async () => {
       try {
-        // const res = await fetch('https://balancebox.onrender.com/get-food');
-        const res = await fetch('http://localhost:5000/get-food')
+        const res = await fetch('https://balancebox.onrender.com/get-food');
+        // const res = await fetch('http://localhost:5000/get-food')
         const datad = await res.json();
-        console.log('res')
+        // console.log('res')
         setData(datad);
 
         if (data.status === 422 || data.status === 500) {
@@ -36,13 +41,18 @@ function LandingPage() {
           return data.error;
         }
 
-       console.log("Data: ",data)
+      //  console.log("Data: ",data)
       } catch (err) {
         return "An erros occured: " + err;
       }
     };
     getCourse()
   }, [Breakfastlist, Lunchlist, Dinnerlist, data]);
+
+
+
+  // login
+  
 
   // to display modal
   const changeBreakfast = () => {
@@ -157,8 +167,18 @@ function LandingPage() {
       <div className="navbar">
         <img src={logo} className="logo" alt="logo" />
         <div className="user-login">
-          <p className="login">LOGIN</p>
-          <img src={user} alt="" className="user" />
+          {
+            isAuthenticated?(
+              <p  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="login">LOGOUT</p>
+            ): (
+          
+          <p  onClick={() => loginWithRedirect()} className="login">LOGIN</p>)}
+          {
+            isAuthenticated?(<img src={user.picture} alt="" className="user" />
+            ):(
+              <img src={userimg} alt="" className="user" />
+            )
+          }
         </div>
       </div>
       <div className="content">
