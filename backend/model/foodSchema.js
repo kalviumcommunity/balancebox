@@ -27,6 +27,24 @@ const foodSchema = new mongoose.Schema({
   }
 });
 
-const Food = mongoose.model("FOOD", foodSchema);
 
-module.exports = Food;
+const blogSchema = new mongoose.Schema({
+  
+  blogTitle:{
+    type: String,
+    required:true
+  },
+  blog:{
+    type: String,
+    required:true
+  },
+  image: {
+    type: String,
+    required:false  
+  }
+})
+
+const Food = mongoose.model("FOOD", foodSchema);
+const Blog = mongoose.model("BLOG",blogSchema);
+
+module.exports = {Food, Blog};

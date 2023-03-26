@@ -17,9 +17,9 @@ function App() {
     > 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />{" "}
-          <Route path="/Calculate" element={<Calculate />} />{" "}
-        </Routes>{" "}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/Calculate" element={<Calculate />} />
+        </Routes>
       </BrowserRouter>
     </Auth0Provider>
   );
