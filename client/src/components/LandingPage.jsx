@@ -19,10 +19,11 @@ function LandingPage() {
   const [Lunchlist, setLunchList] = useState([]);
   const [Dinnerlist, setDinnerList] = useState([]);
   const [data,setData] = useState([])
+  // const [blogdata,setBlogdata] = useState([])
   const { loginWithRedirect, isAuthenticated, logout , user } = useAuth0();
   // const { logout } = useAuth0();
   // const { , isLoading } = useAuth0();
-  console.log(user)
+  // console.log(user)
 
   useEffect(() => {
     // console.log(Breakfastlist);
@@ -47,6 +48,8 @@ function LandingPage() {
       }
     };
     getCourse()
+    
+    // console.log(blogdata,data)
   }, [Breakfastlist, Lunchlist, Dinnerlist, data]);
 
 
@@ -169,6 +172,9 @@ function LandingPage() {
       <div className="navbar">
         <img src={`./logo.png`} className="logo" alt="logo" />
         <div className="user-login">
+          <h1 onClick={()=>{window.location.pathname='/Blog'}} >
+            Blog
+          </h1>
           {
             isAuthenticated?(
               <p  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="login">LOGOUT</p>
