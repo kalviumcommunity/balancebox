@@ -2,25 +2,26 @@
 import "./App.css";
 import LandingPage from "./components/LandingPage";
 import Calculate from "./components/Calculate";
+import Blog from "./components/Blog";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 function App() {
+
   return (
     <Auth0Provider
-      // domain ="dev-njmaitf8k2yax3vn.us.auth0.com"
-      // clientId ="LD1pu4LdGmYuyBzR37YcR0fN4NxzcOOX"
-      clientId= {process.env.clientId}
-      domain={process.env.domain}
+      clientId= {process.env.REACT_APP_CLIENT_ID}
+      domain={process.env.REACT_APP_DOMAIN}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}
     > 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />{" "}
-          <Route path="/Calculate" element={<Calculate />} />{" "}
-        </Routes>{" "}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/Calculate" element={<Calculate />} />
+          <Route path="/Blog" element={<Blog />} />
+        </Routes>
       </BrowserRouter>
     </Auth0Provider>
   );
