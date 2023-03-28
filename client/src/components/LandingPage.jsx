@@ -172,7 +172,9 @@ function LandingPage() {
       <div className="navbar">
         <img src={`./logo.png`} className="logo" alt="logo" />
         <div className="user-login">
-          <h1 onClick={()=>{window.location.pathname='/Blog'}} >
+          <h1 onClick={() => {
+              navigate("/Blog");
+            }} >
             Blog
           </h1>
           {
