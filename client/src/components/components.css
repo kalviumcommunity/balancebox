@@ -229,7 +229,7 @@ body {
   flex-direction: column;
   box-shadow: 2px 2px 1px rgb(68, 68, 68);
   background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .calculate {

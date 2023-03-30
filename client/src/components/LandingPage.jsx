@@ -43,7 +43,7 @@ function LandingPage() {
           return data.error;
         }
 
-        //  console.log("Data: ",data)
+         console.log("Data: ",data)
       } catch (err) {
         return "An erros occured: " + err;
       }
@@ -168,9 +168,19 @@ function LandingPage() {
   const selectItem = (e) => {
     // console.log(e);
     setsearched(e.target.outerText);
+    changeHandler({
+      target: {
+        value: e.target.outerText,
+      },
+    });
   };
   const selectImage = (e) => {
     setsearched(e.target.alt);
+    changeHandler({
+      target: {
+        value: e.target.alt,
+      },
+    });
   };
   const handleSuggestionClick = (suggestion) => {
     // Set input value to selected suggestion
@@ -329,9 +339,8 @@ function LandingPage() {
               />
               <button onClick={() => searchBreakfast()}>+</button>
             </div>
-            { (searched)?
-            <div className="suggestions">
-            
+            {searched ? (
+              <div className="suggestions">
                 {filteredSuggestions.map((suggestion, index) => (
                   <p
                     key={index}
@@ -340,7 +349,8 @@ function LandingPage() {
                     {suggestion.name}
                   </p>
                 ))}
-            </div>:null}
+              </div>
+            ) : null}
             <div>
               <div className="foodList">
                 {data.map((item) => (
@@ -393,9 +403,8 @@ function LandingPage() {
               />
               <button onClick={() => searchLunch()}>+</button>
             </div>
-            { (searched)?
-            <div className="suggestions">
-            
+            {searched ? (
+              <div className="suggestions">
                 {filteredSuggestions.map((suggestion, index) => (
                   <p
                     key={index}
@@ -404,7 +413,8 @@ function LandingPage() {
                     {suggestion.name}
                   </p>
                 ))}
-            </div>:null}
+              </div>
+            ) : null}
 
             <div className="foodList">
               {data.map((item) => (
@@ -456,9 +466,8 @@ function LandingPage() {
               />
               <button onClick={() => searchDinner()}>+</button>
             </div>
-            { (searched)?
-            <div className="suggestions">
-            
+            {searched ? (
+              <div className="suggestions">
                 {filteredSuggestions.map((suggestion, index) => (
                   <p
                     key={index}
@@ -467,7 +476,8 @@ function LandingPage() {
                     {suggestion.name}
                   </p>
                 ))}
-            </div>:null}
+              </div>
+            ) : null}
             <div className="foodList">
               {data.map((item) => (
                 <div>
