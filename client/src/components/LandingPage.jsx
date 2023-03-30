@@ -24,7 +24,7 @@ function LandingPage() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   // const { logout } = useAuth0();
   // const { , isLoading } = useAuth0();
-  // console.log(user)
+  console.log(user)
 
   useEffect(() => {
     // console.log(Breakfastlist);
@@ -43,7 +43,7 @@ function LandingPage() {
           return data.error;
         }
 
-         console.log("Data: ",data)
+        console.log("Data: ", data);
       } catch (err) {
         return "An erros occured: " + err;
       }
@@ -194,13 +194,14 @@ function LandingPage() {
       <div className="navbar">
         <img src={`./logo.png`} className="logo" alt="logo" />
         <div className="user-login">
-          <h1
+          <div
             onClick={() => {
               navigate("/Blog");
             }}
           >
-            Blog
-          </h1>
+            <h1 className="login">Blog</h1>
+          </div>
+
           {isAuthenticated ? (
             <p
               onClick={() =>
@@ -208,11 +209,11 @@ function LandingPage() {
               }
               className="login"
             >
-              LOGOUT
+              Logout
             </p>
           ) : (
             <p onClick={() => loginWithRedirect()} className="login">
-              LOGIN
+              Login
             </p>
           )}
           {isAuthenticated ? (
