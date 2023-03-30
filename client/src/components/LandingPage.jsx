@@ -18,9 +18,10 @@ function LandingPage() {
   const [Breakfastlist, setBreakfastList] = useState([]);
   const [Lunchlist, setLunchList] = useState([]);
   const [Dinnerlist, setDinnerList] = useState([]);
-  const [data,setData] = useState([])
+  const [data, setData] = useState([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   // const [blogdata,setBlogdata] = useState([])
-  const { loginWithRedirect, isAuthenticated, logout , user } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   // const { logout } = useAuth0();
   // const { , isLoading } = useAuth0();
   // console.log(user)
@@ -31,7 +32,7 @@ function LandingPage() {
     // console.log(Dinnerlist);
     const getCourse = async () => {
       try {
-        const res = await fetch('https://balancebox.onrender.com/get-food');
+        const res = await fetch("https://balancebox.onrender.com/get-food");
         // const res = await fetch('http://localhost:5000/get-food')
         const datad = await res.json();
         // console.log('res')
@@ -42,20 +43,17 @@ function LandingPage() {
           return data.error;
         }
 
-      //  console.log("Data: ",data)
+        //  console.log("Data: ",data)
       } catch (err) {
         return "An erros occured: " + err;
       }
     };
-    getCourse()
-    
+    getCourse();
+
     // console.log(blogdata,data)
   }, [Breakfastlist, Lunchlist, Dinnerlist, data]);
 
-
-
   // login
-  
 
   // to display modal
   const changeBreakfast = () => {
@@ -78,7 +76,17 @@ function LandingPage() {
 
   // add input
   const changeHandler = (e) => {
-    setsearched(e.target.value);
+    const value = e.target.value;
+    console.log("Input value:", value);
+    console.log("data:", data);
+    // Filter suggestions based on input value
+    const filtered = data.filter((suggestion) => {
+      console.log(suggestion.name.toLowerCase().includes(value.toLowerCase()));
+      return suggestion.name.toLowerCase().includes(value.toLowerCase());
+    });
+    console.log(filtered);
+    setFilteredSuggestions(filtered);
+    setsearched(value);
   };
 
   //  search
@@ -164,29 +172,44 @@ function LandingPage() {
   const selectImage = (e) => {
     setsearched(e.target.alt);
   };
-
-
+  const handleSuggestionClick = (suggestion) => {
+    // Set input value to selected suggestion
+    setsearched(suggestion.name);
+    // Clear suggestions
+    setFilteredSuggestions([]);
+  };
 
   return (
     <div>
       <div className="navbar">
         <img src={`./logo.png`} className="logo" alt="logo" />
         <div className="user-login">
-          <h1 onClick={()=>{window.location.pathname='/Blog'}} >
+          <h1
+            onClick={() => {
+              navigate("/Blog");
+            }}
+          >
             Blog
           </h1>
-          {
-            isAuthenticated?(
-              <p  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="login">LOGOUT</p>
-            ): (
-          
-          <p  onClick={() => loginWithRedirect()} className="login">LOGIN</p>)}
-          {
-            isAuthenticated?(<img src={user.picture} alt="" className="user" />
-            ):(
-              <img src={`./Profile.png`} alt="" className="user" />
-            )
-          }
+          {isAuthenticated ? (
+            <p
+              onClick={() =>
+                logout({ logoutParams: { returnTo: window.location.origin } })
+              }
+              className="login"
+            >
+              LOGOUT
+            </p>
+          ) : (
+            <p onClick={() => loginWithRedirect()} className="login">
+              LOGIN
+            </p>
+          )}
+          {isAuthenticated ? (
+            <img src={user.picture} alt="" className="user" />
+          ) : (
+            <img src={`./Profile.png`} alt="" className="user" />
+          )}
         </div>
       </div>
       <div className="content">
@@ -306,6 +329,18 @@ function LandingPage() {
               />
               <button onClick={() => searchBreakfast()}>+</button>
             </div>
+            { (searched)?
+            <div className="suggestions">
+            
+                {filteredSuggestions.map((suggestion, index) => (
+                  <p
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion.name}
+                  </p>
+                ))}
+            </div>:null}
             <div>
               <div className="foodList">
                 {data.map((item) => (
@@ -321,22 +356,26 @@ function LandingPage() {
                 ))}
               </div>
             </div>
-            {Breakfastlist.length>0 && <div className="innerList">
-              {Breakfastlist.map((item, index) => (
-                <div key={index}>
-                  <ul>
-                    <li>{item.name}</li>
-                    <p>quantity:</p>
-                    <input
-                      type="number"
-                      defaultValue={1}
-                      min={1}
-                      onChange={(e) => updateQuantitybf(index, e.target.value)}
-                    />
-                  </ul>
-                </div>
-              ))}
-            </div>}
+            {Breakfastlist.length > 0 && (
+              <div className="innerList">
+                {Breakfastlist.map((item, index) => (
+                  <div key={index}>
+                    <ul>
+                      <li>{item.name}</li>
+                      <p>quantity:</p>
+                      <input
+                        type="number"
+                        defaultValue={1}
+                        min={1}
+                        onChange={(e) =>
+                          updateQuantitybf(index, e.target.value)
+                        }
+                      />
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <div
@@ -350,10 +389,22 @@ function LandingPage() {
                 type="searchbar"
                 value={searched}
                 placeholder="Search and Add"
-                onChange={changeHandler}
+                onChange={(e) => changeHandler(e)}
               />
               <button onClick={() => searchLunch()}>+</button>
             </div>
+            { (searched)?
+            <div className="suggestions">
+            
+                {filteredSuggestions.map((suggestion, index) => (
+                  <p
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion.name}
+                  </p>
+                ))}
+            </div>:null}
 
             <div className="foodList">
               {data.map((item) => (
@@ -368,23 +419,26 @@ function LandingPage() {
                 </div>
               ))}
             </div>
-            {Lunchlist.length>0 &&
-            <div className="innerList">
-              {Lunchlist.map((item, index) => (
-                <div key={index}>
-                  <ul>
-                    <li>{item.name}</li>
-                    <p>quantity</p>
-                    <input
-                      type="number"
-                      defaultValue={1}
-                      min={1}
-                      onChange={(e) => updateQuantitylh(index, e.target.value)}
-                    />
-                  </ul>
-                </div>
-              ))}
-            </div>}
+            {Lunchlist.length > 0 && (
+              <div className="innerList">
+                {Lunchlist.map((item, index) => (
+                  <div key={index}>
+                    <ul>
+                      <li>{item.name}</li>
+                      <p>quantity</p>
+                      <input
+                        type="number"
+                        defaultValue={1}
+                        min={1}
+                        onChange={(e) =>
+                          updateQuantitylh(index, e.target.value)
+                        }
+                      />
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <div
@@ -402,6 +456,18 @@ function LandingPage() {
               />
               <button onClick={() => searchDinner()}>+</button>
             </div>
+            { (searched)?
+            <div className="suggestions">
+            
+                {filteredSuggestions.map((suggestion, index) => (
+                  <p
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion.name}
+                  </p>
+                ))}
+            </div>:null}
             <div className="foodList">
               {data.map((item) => (
                 <div>
@@ -414,24 +480,28 @@ function LandingPage() {
                   <p onClick={(e) => selectItem(e)}>{item.name}</p>
                 </div>
               ))}
-            </div>{Dinnerlist.length>0&&
-            <div className="innerList">
-              {Dinnerlist.map((item, index) => (
-                <div key={index}>
-                  <ul>
-                    {" "}
-                    <li>{item.name}</li>
-                    <p>quantity</p>
-                    <input
-                      type="number"
-                      defaultValue={1}
-                      min={1}
-                      onChange={(e) => updateQuantitydr(index, e.target.value)}
-                    />
-                  </ul>
-                </div>
-              ))}
-            </div>}
+            </div>
+            {Dinnerlist.length > 0 && (
+              <div className="innerList">
+                {Dinnerlist.map((item, index) => (
+                  <div key={index}>
+                    <ul>
+                      {" "}
+                      <li>{item.name}</li>
+                      <p>quantity</p>
+                      <input
+                        type="number"
+                        defaultValue={1}
+                        min={1}
+                        onChange={(e) =>
+                          updateQuantitydr(index, e.target.value)
+                        }
+                      />
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -229,6 +229,7 @@ z-index: 3;
 flex-direction: column;
 box-shadow: 2px 2px 1px rgb(68, 68, 68);
 background-image: linear-gradient(to bottom right, #4d94ff, #80bfff, #b3d9ff);
+overflow-y: scroll;
 }
 
 
@@ -386,6 +387,32 @@ ul>p{margin : 5px;}
     font-size: 45px;
 }
 
+.suggestions{
+    max-height: 300px;
+    background-color: #272fc9;
+    width: 100%;
+    overflow-y: scroll;
+    border-radius: 5px;
+    font-family: 'Poppins';
+    color: white;
+}
+.suggestions p{
+    margin-left: 5px;
+}
+
+.suggestions::-webkit-scrollbar {
+    width: 8px; /* width of the scrollbar */
+}
+
+.suggestions::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1); /* color of the track */
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.5); /* color of the scrollbar */
+    border-radius: 10px; /* roundness of the scrollbar */
+}
+
 
 
 
@@ -412,6 +439,26 @@ ul>p{margin : 5px;}
     -webkit-text-fill-color: transparent;
 }
 
+.grayFilm{
+    position: absolute;
+    width: 80vw;
+    background-color: rgb(166, 165, 165);
+    height: 40vw;
+    background:rgb(117, 116, 116);
+    background:rgba(135, 134, 134, 0.9);
+
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    background-color: rgba(57, 56, 56, 0.5);
+}
+
+
+
+.InputForm{
+    position: absolute;
+    top:45%;
+    left:35%;
+}
 
 
 p{
