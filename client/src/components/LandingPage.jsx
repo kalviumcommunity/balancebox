@@ -24,7 +24,7 @@ function LandingPage() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   // const { logout } = useAuth0();
   // const { , isLoading } = useAuth0();
-  console.log(user)
+  console.log(user);
 
   useEffect(() => {
     // console.log(Breakfastlist);
@@ -52,6 +52,26 @@ function LandingPage() {
 
     // console.log(blogdata,data)
   }, [Breakfastlist, Lunchlist, Dinnerlist, data]);
+
+  useEffect(() => {
+    const saveUser = async () => {
+      if (isAuthenticated) {
+        const setuser = await fetch("http://localhost:5000/user-details", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sub: user.sub,
+            name: user.name,
+            email: user.email,
+          }),
+        });
+        console.log(setuser);
+      }
+    };
+    saveUser();
+  }, [isAuthenticated]);
 
   // login
 
@@ -189,6 +209,30 @@ function LandingPage() {
     setFilteredSuggestions([]);
   };
 
+  const handleCalculate = () => {
+    const saveData = async () => {
+      const data = await fetch("http://localhost:5000/put-user-details", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sub: user.sub,
+          List: { Breakfastlist, Lunchlist, Dinnerlist },
+        }),
+      });
+      console.log(data)
+    };
+    saveData()
+    navigate("/Calculate", {
+      state: {
+        Breakfastlist: Breakfastlist,
+        Lunchlist: Lunchlist,
+        Dinnerlist: Dinnerlist,
+      },
+    });
+  };
+
   return (
     <div>
       <div className="navbar">
@@ -310,18 +354,7 @@ function LandingPage() {
               ))}
             </div>
           </div>
-          <button
-            className="calculate"
-            onClick={() => {
-              navigate("/Calculate", {
-                state: {
-                  Breakfastlist: Breakfastlist,
-                  Lunchlist: Lunchlist,
-                  Dinnerlist: Dinnerlist,
-                },
-              });
-            }}
-          >
+          <button className="calculate" onClick={() => handleCalculate()}>
             Calculate
           </button>
         </div>

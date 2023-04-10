@@ -92,7 +92,7 @@ function Calculate() {
       },
       {
         label: "required values",
-        data: [parseInt(Weigth) * 1.5, 0.25 * calories, 9 * Weigth], // fixed values for Protein, Fat and Carbs
+        data: [parseInt(Weigth) * 1.5, (0.25 * calories)/9, 9 * Weigth], // fixed values for Protein, Fat and Carbs
         fill: true,
         backgroundColor: [
           "rgba(255, 0, 0, 0.5)",
