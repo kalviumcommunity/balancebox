@@ -24,7 +24,7 @@ function LandingPage() {
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
   // const { logout } = useAuth0();
   // const { , isLoading } = useAuth0();
-  // console.log(user)
+  console.log(user);
 
   useEffect(() => {
     // console.log(Breakfastlist);
@@ -43,7 +43,7 @@ function LandingPage() {
           return data.error;
         }
 
-        //  console.log("Data: ",data)
+        console.log("Data: ", data);
       } catch (err) {
         return "An erros occured: " + err;
       }
@@ -52,6 +52,26 @@ function LandingPage() {
 
     // console.log(blogdata,data)
   }, [Breakfastlist, Lunchlist, Dinnerlist, data]);
+
+  useEffect(() => {
+    const saveUser = async () => {
+      if (isAuthenticated) {
+        const setuser = await fetch("http://localhost:5000/user-details", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sub: user.sub,
+            name: user.name,
+            email: user.email,
+          }),
+        });
+        console.log(setuser);
+      }
+    };
+    saveUser();
+  }, [isAuthenticated]);
 
   // login
 
@@ -168,9 +188,19 @@ function LandingPage() {
   const selectItem = (e) => {
     // console.log(e);
     setsearched(e.target.outerText);
+    changeHandler({
+      target: {
+        value: e.target.outerText,
+      },
+    });
   };
   const selectImage = (e) => {
     setsearched(e.target.alt);
+    changeHandler({
+      target: {
+        value: e.target.alt,
+      },
+    });
   };
   const handleSuggestionClick = (suggestion) => {
     // Set input value to selected suggestion
@@ -179,18 +209,43 @@ function LandingPage() {
     setFilteredSuggestions([]);
   };
 
+  const handleCalculate = () => {
+    const saveData = async () => {
+      const data = await fetch("http://localhost:5000/put-user-details", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sub: user.sub,
+          List: { Breakfastlist, Lunchlist, Dinnerlist },
+        }),
+      });
+      console.log(data)
+    };
+    saveData()
+    navigate("/Calculate", {
+      state: {
+        Breakfastlist: Breakfastlist,
+        Lunchlist: Lunchlist,
+        Dinnerlist: Dinnerlist,
+      },
+    });
+  };
+
   return (
     <div>
       <div className="navbar">
         <img src={`./logo.png`} className="logo" alt="logo" />
         <div className="user-login">
-          <h1
+          <div
             onClick={() => {
               navigate("/Blog");
             }}
           >
-            Blog
-          </h1>
+            <h1 className="login">Blog</h1>
+          </div>
+
           {isAuthenticated ? (
             <p
               onClick={() =>
@@ -198,11 +253,11 @@ function LandingPage() {
               }
               className="login"
             >
-              LOGOUT
+              Logout
             </p>
           ) : (
             <p onClick={() => loginWithRedirect()} className="login">
-              LOGIN
+              Login
             </p>
           )}
           {isAuthenticated ? (
@@ -299,18 +354,7 @@ function LandingPage() {
               ))}
             </div>
           </div>
-          <button
-            className="calculate"
-            onClick={() => {
-              navigate("/Calculate", {
-                state: {
-                  Breakfastlist: Breakfastlist,
-                  Lunchlist: Lunchlist,
-                  Dinnerlist: Dinnerlist,
-                },
-              });
-            }}
-          >
+          <button className="calculate" onClick={() => handleCalculate()}>
             Calculate
           </button>
         </div>
@@ -329,9 +373,8 @@ function LandingPage() {
               />
               <button onClick={() => searchBreakfast()}>+</button>
             </div>
-            { (searched)?
-            <div className="suggestions">
-            
+            {searched ? (
+              <div className="suggestions">
                 {filteredSuggestions.map((suggestion, index) => (
                   <p
                     key={index}
@@ -340,7 +383,8 @@ function LandingPage() {
                     {suggestion.name}
                   </p>
                 ))}
-            </div>:null}
+              </div>
+            ) : null}
             <div>
               <div className="foodList">
                 {data.map((item) => (
@@ -393,9 +437,8 @@ function LandingPage() {
               />
               <button onClick={() => searchLunch()}>+</button>
             </div>
-            { (searched)?
-            <div className="suggestions">
-            
+            {searched ? (
+              <div className="suggestions">
                 {filteredSuggestions.map((suggestion, index) => (
                   <p
                     key={index}
@@ -404,7 +447,8 @@ function LandingPage() {
                     {suggestion.name}
                   </p>
                 ))}
-            </div>:null}
+              </div>
+            ) : null}
 
             <div className="foodList">
               {data.map((item) => (
@@ -456,9 +500,8 @@ function LandingPage() {
               />
               <button onClick={() => searchDinner()}>+</button>
             </div>
-            { (searched)?
-            <div className="suggestions">
-            
+            {searched ? (
+              <div className="suggestions">
                 {filteredSuggestions.map((suggestion, index) => (
                   <p
                     key={index}
@@ -467,7 +510,8 @@ function LandingPage() {
                     {suggestion.name}
                   </p>
                 ))}
-            </div>:null}
+              </div>
+            ) : null}
             <div className="foodList">
               {data.map((item) => (
                 <div>

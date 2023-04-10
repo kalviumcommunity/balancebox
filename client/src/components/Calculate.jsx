@@ -25,7 +25,7 @@ function Calculate() {
   const [Display, setDisplay] = useState("none");
   const [Age, setAge] = useState("");
   const [Weigth, setWeight] = useState("");
-  const [dataOk,setDataok] = useState(false)
+  const [dataOk, setDataok] = useState(false);
   // const [requiredCarbs, setRequiredCarbs] = useState('');
   // const [requiredFats, setRequiredFats] = useState('');
 
@@ -34,17 +34,20 @@ function Calculate() {
   const [protien, setprotien] = useState(0);
   const [fat, setfat] = useState(0);
   const [carbs, setcarbs] = useState(0);
+  const [calories, setcalories] = useState(0);
 
   function calculateTotalMacros(data) {
     let totalProtein = 0;
     let totalFat = 0;
     let totalCarbs = 0;
+    let totalCalories = 0;
 
     data.reduce((acc, curr) => {
       console.log(curr);
       totalProtein += curr.protien * parseInt(curr.quantity);
       totalFat += curr.fat * parseInt(curr.quantity);
       totalCarbs += curr.carbs * parseInt(curr.quantity);
+      totalCalories += curr.calories * parseInt(curr.quantity);
       return acc;
     }, 0);
 
@@ -52,6 +55,7 @@ function Calculate() {
       protein: Math.round(parseFloat(totalProtein)),
       fat: Math.round(parseFloat(totalFat)),
       carbs: Math.round(parseFloat(totalCarbs)),
+      calories: Math.round(parseFloat(totalCalories)),
     };
   }
 
@@ -62,6 +66,7 @@ function Calculate() {
     setprotien(totalmacros.protein);
     setfat(totalmacros.fat);
     setcarbs(totalmacros.carbs);
+    setcalories(totalmacros.calories);
   }, [totalmacros]);
 
   const data = {
@@ -75,24 +80,28 @@ function Calculate() {
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
           "rgba(255, 206, 86, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
           "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
           "rgba(255, 206, 86, 1)",
         ],
         borderWidth: 3,
       },
       {
         label: "required values",
-        data: [parseInt(Weigth)*1.5,750,1375], // fixed values for Protein, Fat and Carbs
+        data: [parseInt(Weigth) * 1.5, (0.25 * calories)/9, 9 * Weigth], // fixed values for Protein, Fat and Carbs
         fill: true,
         backgroundColor: [
           "rgba(255, 0, 0, 0.5)",
           "rgba(255, 0, 0, 0.5)",
           "rgba(255, 0, 0, 0.5)",
+          "rgba(255, 0, 0, 0.5)",
         ],
         borderColor: [
+          "rgba(255, 0, 0, 1)",
           "rgba(255, 0, 0, 1)",
           "rgba(255, 0, 0, 1)",
           "rgba(255, 0, 0, 1)",
@@ -120,7 +129,7 @@ function Calculate() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateColumns: "repeat(5, 1fr)",
                   marginLeft: "10vw",
                 }}
                 key={index}
@@ -129,6 +138,7 @@ function Calculate() {
                 <p>Protein: {item.protien * item.quantity}</p>
                 <p>Carbs: {item.carbs * item.quantity}</p>
                 <p>Fat: {item.fat * item.quantity}</p>
+                <p>Calories: {item.calories * item.quantity}</p>
               </div>
             ))}
           </div>
@@ -140,7 +150,7 @@ function Calculate() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateColumns: "repeat(5, 1fr)",
                   marginLeft: "10vw",
                 }}
                 key={index}
@@ -149,6 +159,7 @@ function Calculate() {
                 <p>Protein: {item.protien * item.quantity}</p>
                 <p>Carbs: {item.carbs * item.quantity}</p>
                 <p>Fat: {item.fat * item.quantity}</p>
+                <p>Calories: {item.calories * item.quantity}</p>
               </div>
             ))}
           </div>
@@ -160,7 +171,7 @@ function Calculate() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(4, 1fr)",
+                  gridTemplateColumns: "repeat(5, 1fr)",
                   marginLeft: "10vw",
                 }}
                 key={index}
@@ -169,6 +180,7 @@ function Calculate() {
                 <p>Protein: {item.protien * item.quantity}</p>
                 <p>Carbs: {item.carbs * item.quantity}</p>
                 <p>Fat: {item.fat * item.quantity}</p>
+                <p>Calories: {item.calories * item.quantity}</p>
               </div>
             ))}
           </div>
@@ -176,15 +188,16 @@ function Calculate() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: "repeat(5, 1fr)",
             marginTop: "10px",
             alignItems: "center",
           }}
         >
-          <h1 style={{ marginRight: "21.3vw" }}>Total</h1>
+          <h1 style={{ marginRight: "18.0vw" }}>Total</h1>
           <p>Protien:{protien}</p>
           <p>Carbs:{carbs}</p>
           <p>Fat:{fat}</p>
+          <p>Calories:{calories}</p>
         </div>
         <style>
           @import
@@ -192,7 +205,9 @@ function Calculate() {
         </style>
       </div>
       {Age && Weigth && dataOk ? (
-        <Bar data={data} options={options} />
+        <div style={{width:"80vw",marginLeft:"10vw",border:'2px  solid black'}}>
+          <Bar data={data} options={options} />
+        </div>
       ) : (
         <div
           onMouseOver={() => {
@@ -241,7 +256,13 @@ function Calculate() {
                     width="25vw"
                   ></Input>
                 </FormControl>
-                <button onClick={()=>{setDataok(true)}}>Submit</button>
+                <button
+                  onClick={() => {
+                    setDataok(true);
+                  }}
+                >
+                  Submit
+                </button>
               </Card>
             </VStack>
           </Box>
